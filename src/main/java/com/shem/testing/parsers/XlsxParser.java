@@ -1,37 +1,39 @@
 package com.shem.testing.parsers;
 
 import com.shem.testing.Question;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
 
-import java.io.File;
-import java.io.FileInputStream;
+import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 @Service
 public class XlsxParser {
+    private List<Question> questions;
 
     public List<Question> getQuestions() {
+        return questions;
+    }
+
+    @PostConstruct
+    void init(){
+        questions = getQuestionsFromExcel();
+    }
+
+
+    public List<Question> getQuestionsFromExcel() {
         List<Question> questions = new ArrayList<>();
 
         try {
             XSSFWorkbook workbook = new XSSFWorkbook(ResourceUtils.getFile("classpath:questions.xlsx"));
 
-            // Get first sheet from the workbook
             XSSFSheet sheet = workbook.getSheetAt(0);
-
-            // Get iterator to all the rows in current sheet
-
 
             for (Row row : sheet) {
                 // Get iterator to all cells of current row

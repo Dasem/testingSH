@@ -1,15 +1,15 @@
 package com.shem.testing.controllers;
 
+import com.shem.testing.Question;
 import com.shem.testing.parsers.XlsxParser;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 @Controller
 public class MainController {
@@ -35,7 +35,8 @@ public class MainController {
         model.addAttribute(group);
         model.addAttribute(course);
         model.addAttribute(questionsCount);
-        model.addAttribute("questions", xlsxParser.getQuestions());
+        List<Question> filteredQuestions = xlsxParser.getQuestions(); //TODO: заполнять отфильтрованными вопросами
+        model.addAttribute("questions", filteredQuestions);
         return "test";
     }
 }
