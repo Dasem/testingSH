@@ -12,6 +12,14 @@
 
 <div class="container">
     <h1>Предположим, это тестовая страница</h1>
+    <div th:each="question:${questions}">
+        Вопрос: <p th:text="${question.getQuestion()}"></p>
+        <div th:each="option:${question.getOptions()}">
+            <label>
+                <input type="checkbox" th:text="${option}">
+            </label>
+        </div>
+    </div>
     <p class="mt-5 mb-3 text-muted">&copy; 2019-2020</p>
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

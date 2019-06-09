@@ -1,5 +1,7 @@
 package com.shem.testing.controllers;
 
+import com.shem.testing.parsers.XlsxParser;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -13,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class MainController {
 
     private static int requestCounter = 0;
+
+    @Autowired
+    XlsxParser xlsxParser;
 
     @GetMapping("/")
     public String regPage(Model model) {
@@ -30,7 +35,7 @@ public class MainController {
         model.addAttribute(group);
         model.addAttribute(course);
         model.addAttribute(questionsCount);
-
+        model.addAttribute("questions", xlsxParser.getQuestions());
         return "test";
     }
 }
