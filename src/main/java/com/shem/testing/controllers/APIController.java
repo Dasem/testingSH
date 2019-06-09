@@ -1,14 +1,10 @@
 package com.shem.testing.controllers;
 
-import com.shem.testing.Answer;
 import com.shem.testing.AnswersHolder;
-import com.shem.testing.Question;
-import com.shem.testing.parsers.XlsxParser;
+import com.shem.testing.services.QuestionFilterService;
+import com.shem.testing.services.XlsxParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Map;
 
 @RestController
 public class APIController {
@@ -16,12 +12,15 @@ public class APIController {
     @Autowired
     XlsxParser xlsxParser;
 
+    @Autowired
+    QuestionFilterService questionFilterService;
+
     @ResponseBody
     @PostMapping("/check")
-    public String check(@RequestParam Map<String, String> body){
+    public String check(@RequestBody AnswersHolder body){
 
         //Поздравляем, вы ответили на n (%) вопросов
-        return "";
+        return body.produceStringAnswer(questionFilterService.filter(body.getTokens()));
     }
 
 //    private String checkAnswers(List<Answer> answers){
