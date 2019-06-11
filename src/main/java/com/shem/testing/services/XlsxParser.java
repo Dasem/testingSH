@@ -9,9 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
 
 import javax.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class XlsxParser {
@@ -19,6 +17,12 @@ public class XlsxParser {
 
     public List<Question> getQuestions() {
         return questions;
+    }
+
+    private Set<String> themes = new HashSet<>();
+
+    public Set<String> getThemes() {
+        return themes;
     }
 
     @PostConstruct
@@ -45,6 +49,7 @@ public class XlsxParser {
                     String stringCellValue = cell.getStringCellValue();
                     if (column == 0) {
                         question.setTheme(stringCellValue);
+                        themes.add(stringCellValue);
                     } else if (column == 1) {
                         question.setQuestion(stringCellValue);
                     } else {
