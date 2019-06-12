@@ -41,7 +41,7 @@
             url: '/check',
             headers: {'Content-Type': 'application/json'},
             /*[+
-            data: JSON.stringify({answers: response, tokens: Array.from(allTokens), userInfo: 'Имя: ' + [[${inputFIO}]] + '\nГруппа' + [[${inputGroup}]] + '\nКурс' + inputCourse}),
+            data: JSON.stringify({answers: response, tokens: Array.from(allTokens), userInfo: 'Имя: ' + [[${inputFIO}]] + '\nГруппа: ' + [[${inputGroup}]] + '\nКурс: ' + [[${inputCourse}]]}),
             +]*/
             success: function (data) {
                 alert(data)

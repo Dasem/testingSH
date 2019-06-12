@@ -25,14 +25,14 @@ public class MainController {
 
     @GetMapping("/")
     public String regPage(Model model) {
-        model.addAttribute("count", requestCounter++);
+        model.addAttribute("questionsSize", xlsxParser.getQuestions().size());
         return "registration";
     }
 
     @PostMapping("/theme")
     public String themes(Model model,
                          @RequestParam(name = "inputFIO") String fio,
-                         @RequestParam(name = "inputGroup") Integer group,
+                         @RequestParam(name = "inputGroup") String group,
                          @RequestParam(name = "inputCourse") Integer course,
                          @RequestParam(name = "inputQuestionsCount") Integer questionsCount) {
         model.addAttribute("inputFIO", fio);
@@ -46,7 +46,7 @@ public class MainController {
     @PostMapping("/test")
     public String test(Model model,
                        @RequestParam(name = "inputFIO") String fio,
-                       @RequestParam(name = "inputGroup") Integer group,
+                       @RequestParam(name = "inputGroup") String group,
                        @RequestParam(name = "inputCourse") Integer course,
                        @RequestParam(name = "inputQuestionsCount") Integer questionsCount,
                        @RequestParam(name = "themes") List<String> themes) {

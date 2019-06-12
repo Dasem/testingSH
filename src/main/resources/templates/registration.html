@@ -17,11 +17,11 @@
 
         <input type="text" name="inputFIO" class="form-control" placeholder="ФИО" required autofocus>
 
-        <input type="number" name="inputGroup" class="form-control" placeholder="Группа" required>
+        <input type="text" name="inputGroup" class="form-control" placeholder="Группа" required>
 
-        <input type="number" name="inputCourse" class="form-control" placeholder="Курс" required>
+        <input type="number" name="inputCourse" min="1" max="6" class="form-control" placeholder="Курс" required>
 
-        <input type="number" name="inputQuestionsCount" class="form-control" placeholder="Количество вопросов" required>
+        <input type="number" name="inputQuestionsCount" min="1" th:max="${questionsSize}" class="form-control" placeholder="Количество вопросов" required>
 
         <!--<div class="checkbox mb-3">-->
         <!--<label>-->
