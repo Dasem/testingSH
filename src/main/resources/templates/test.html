@@ -26,7 +26,8 @@
 </div>
 <script th:inline="javascript">
     function checkAnswers() {
-        $(":checkbox").attr('disabled', true);
+        $(':checkbox').attr('disabled', true);
+        $('button').attr('disabled', true);
         var response = [{token: "", answer: 0}];
         var allTokens = new Set();
         $('input').each(function () {

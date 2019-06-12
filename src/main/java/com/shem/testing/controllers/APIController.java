@@ -29,9 +29,11 @@ public class APIController {
     private synchronized void saveResultsToServer(AnswersHolder body){
         try(FileWriter writer = new FileWriter("results.txt", true))
         {
-            writer.write(body.produceSaveToServerString(questionFilterService.filter(body.getTokens())));
+            String resultForSave = body.produceSaveToServerString(questionFilterService.filter(body.getTokens()))
+                    .replace("\n","\r\n");
+            System.out.println(resultForSave);
+            writer.write(resultForSave);
             writer.append('\n');
-
             writer.flush();
         }
         catch(IOException ex){
@@ -39,10 +41,4 @@ public class APIController {
             System.out.println(ex.getMessage());
         }
     }
-
-//    private String checkAnswers(List<Answer> answers){
-//        List<Question> questions = xlsxParser.getQuestions();
-//
-//
-//    }
 }

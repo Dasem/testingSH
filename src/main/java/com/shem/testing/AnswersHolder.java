@@ -1,6 +1,7 @@
 package com.shem.testing;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class AnswersHolder {
@@ -45,7 +46,8 @@ public class AnswersHolder {
         List<Question> rightAnswers = calculateRightAnswers(filteredQuestions);
         double percent = (1.0 * rightAnswers.size() / allQuestions) * 100;
         filteredQuestions.removeAll(rightAnswers);//Сейчас тут неверные ответы
-        return "Студент:\n" +
+        return "Время: " + new Date().toString() + "\n" +
+                "Студент:\n" +
                 userInfo + "\n" +
                 "Правильно ответил на " + Math.round(percent) + "% вопросов (" + rightAnswers.size() + " из " + allQuestions + ")\n" +
                 "Не верные ответы:\n" +
