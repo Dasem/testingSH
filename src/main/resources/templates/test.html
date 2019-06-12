@@ -13,7 +13,7 @@
 <div class="container">
     <h1>Предположим, это тестовая страница</h1>
     <div th:each="question,stat:${questions}">
-        Вопрос <span th:text="${stat.count}"></span>:  <p th:text="${question.getQuestion()}"></p>
+        Вопрос <span th:text="${stat.count}"></span>: <p th:text="${question.getQuestion()}"></p>
         <div th:each="option,iterStat:${question.getOptions()}">
             <label>
                 <input type="checkbox" th:text="${option}" th:class="${question.getToken()}"
@@ -24,8 +24,9 @@
     <button class="btn btn-lg btn-primary btn-block" type="button" onclick="checkAnswers()">Закончить тест</button>
     <p class="mt-5 mb-3 text-muted">&copy; 2019-2020</p>
 </div>
-<script>
+<script th:inline="javascript">
     function checkAnswers() {
+        $(":checkbox").attr('disabled', true);
         var response = [{token: "", answer: 0}];
         var allTokens = new Set();
         $('input').each(function () {
@@ -39,7 +40,9 @@
             type: 'POST',
             url: '/check',
             headers: {'Content-Type': 'application/json'},
-            data: JSON.stringify({answers: response, tokens: Array.from(allTokens)}),
+            /*[+
+            data: JSON.stringify({answers: response, tokens: Array.from(allTokens), userInfo: 'Имя: ' + [[${inputFIO}]] + '\nГруппа' + [[${inputGroup}]] + '\nКурс' + inputCourse}),
+            +]*/
             success: function (data) {
                 alert(data)
             }

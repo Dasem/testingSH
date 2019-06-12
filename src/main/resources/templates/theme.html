@@ -13,16 +13,35 @@
 <div class="container">
     <h1>Предположим, это выбор тем</h1>
 
-    <div th:each="iterStat:${theme}">
+    <div th:each="theme:${themes}">
+        <th>
         <label>
             <input type="checkbox" th:text="${theme}"
-                   th:name="${iterStat.index}">
+                   th:name="${theme}">
         </label>
     </div>
 
-    <button class="btn btn-lg btn-primary btn-block" type="button" onclick="checkAnswers()">Закончить тест</button>
-    <p class="mt-5 mb-3 text-muted">&copy; 2019-2020</p>
+    <form th:action="@{/test}" method="post">
+        <input type="hidden" name="inputFIO" th:value="${inputFIO}">
+        <input type="hidden" name="inputCourse" th:value="${inputCourse}">
+        <input type="hidden" name="inputGroup" th:value="${inputGroup}">
+        <input type="hidden" name="inputQuestionsCount" th:value="${inputQuestionsCount}">
+        <input type="hidden" name="themes" id="themes">
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="startTest()">Начать тест</button>
+        <p class="mt-5 mb-3 text-muted">&copy; 2019-2020</p>
+    </form>
+
 </div>
+<script>
+    function startTest() {
+        var themes = [];
+        $(':checked').each(function () {
+            themes.push($(this).attr('name'))
+        });
+        $('#themes').val(themes);
+    }
+</script>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"

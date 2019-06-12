@@ -29,18 +29,18 @@ public class MainController {
         return "registration";
     }
 
-    @PostMapping("/themes")
+    @PostMapping("/theme")
     public String themes(Model model,
                          @RequestParam(name = "inputFIO") String fio,
                          @RequestParam(name = "inputGroup") Integer group,
                          @RequestParam(name = "inputCourse") Integer course,
                          @RequestParam(name = "inputQuestionsCount") Integer questionsCount) {
-        model.addAttribute(fio);
-        model.addAttribute(group);
-        model.addAttribute(course);
-        model.addAttribute(questionsCount);
+        model.addAttribute("inputFIO", fio);
+        model.addAttribute("inputGroup", group);
+        model.addAttribute("inputCourse", course);
+        model.addAttribute("inputQuestionsCount", questionsCount);
         model.addAttribute("themes", xlsxParser.getThemes());
-        return "themes";
+        return "theme";
     }
 
     @PostMapping("/test")
@@ -49,13 +49,14 @@ public class MainController {
                        @RequestParam(name = "inputGroup") Integer group,
                        @RequestParam(name = "inputCourse") Integer course,
                        @RequestParam(name = "inputQuestionsCount") Integer questionsCount,
-                       @RequestParam(name = "themes") String themes) {
-        model.addAttribute(fio);
-        model.addAttribute(group);
-        model.addAttribute(course);
-        model.addAttribute(questionsCount);
-        //List<Question> filteredQuestions = filterService.filterQuestion(themes); //TODO: заполнять отфильтрованными вопросами
-        //model.addAttribute("questions", filteredQuestions);
+                       @RequestParam(name = "themes") List<String> themes) {
+        model.addAttribute("inputFIO", fio);
+        model.addAttribute("inputGroup", group);
+        model.addAttribute("inputCourse", course);
+        model.addAttribute("inputQuestionsCount", questionsCount);
+        List<Question> filteredByThemesQuestions = filterService.filterQuestionByThemes(themes);
+        List<Question> filteredByAllQuestions = filterService.filterQuestionByCount(filteredByThemesQuestions, questionsCount);
+        model.addAttribute("questions", filteredByAllQuestions);
         return "test";
     }
 }

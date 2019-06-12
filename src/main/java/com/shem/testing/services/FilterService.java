@@ -14,7 +14,7 @@ public class FilterService {
     @Autowired
     XlsxParser xlsxParser;
 
-    public List<Question> filterQuestion(Collection<String> themes) {
+    public List<Question> filterQuestionByThemes(Collection<String> themes) {
         List<Question> result = new ArrayList<>();
         for (Question question : xlsxParser.getQuestions()) {
             if (themes.contains(question.getTheme())) {
@@ -22,5 +22,12 @@ public class FilterService {
             }
         }
         return result;
+    }
+
+    public List<Question> filterQuestionByCount(List<Question> questions, int count) { //TODO: какое-то тупое обрезание
+        if (count > questions.size()) {
+            return questions;
+        }
+        return questions.subList(0,count);
     }
 }

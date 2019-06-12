@@ -35,7 +35,7 @@ public class XlsxParser {
         List<Question> questions = new ArrayList<>();
 
         try {
-            XSSFWorkbook workbook = new XSSFWorkbook(ResourceUtils.getFile("classpath:questions.xlsx"));
+            XSSFWorkbook workbook = new XSSFWorkbook("questions.xlsx");
 
             XSSFSheet sheet = workbook.getSheetAt(0);
 

@@ -7,6 +7,15 @@ public class AnswersHolder {
 
     List<Answer> answers;
     List<String> tokens;
+    String userInfo;
+
+    public String getUserInfo() {
+        return userInfo;
+    }
+
+    public void setUserInfo(String userInfo) {
+        this.userInfo = userInfo;
+    }
 
     public List<Answer> getAnswers() {
         return answers;
