@@ -12,6 +12,9 @@
 
 <div class="container">
     <h1>Предположим, это тестовая страница</h1>
+
+    <a th:href="@{/}">Страница регистрации</a>
+
     <div th:each="question,stat:${questions}">
         Вопрос <span th:text="${stat.count}"></span>: <p th:text="${question.getQuestion()}"></p>
         <div th:each="option,iterStat:${question.getOptions()}">
