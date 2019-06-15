@@ -1,2 +1,2 @@
 @echo off
-java -jar testing-0.0.1-SNAPSHOT.jar
+java -jar testing-1.0.4.jar
