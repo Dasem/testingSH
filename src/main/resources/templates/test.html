@@ -9,15 +9,15 @@
 <body>
 
 <div class="container">
-    <h1>Предположим, это тестовая страница</h1>
+    <h1>Удачи!</h1>
 
     <a th:href="@{/}">Страница регистрации</a>
 
-    <div th:each="question,stat:${questions}">
-        Вопрос <span th:text="${stat.count}"></span>: <p th:text="${question.getQuestion()}"></p>
-        <div th:each="option,iterStat:${question.getOptions()}">
+    <div th:each="question,stat:${questions}" style="padding: 10px;">
+        Вопрос <span th:text="${stat.count}"></span>:<p th:text="${question.getQuestion()}"></p>
+        <div th:each="option,iterStat:${question.getOptions()}" class="form-check">
             <label>
-                <input type="checkbox" th:text="${option}" th:class="${question.getToken()}"
+                <input type="checkbox" th:text="${option}" class="form-check-input" th:classappend="${question.getToken()}"
                        th:name="${iterStat.index}">
             </label>
         </div>
@@ -30,9 +30,11 @@
         $(':checkbox').attr('disabled', true);
         $('button').attr('disabled', true);
         var response = [{token: "", answer: 0}];
-        var allTokens = new Set();
+        var allTokens = [];
         $('input').each(function () {
-            allTokens.add($(this).attr('class'));
+            if ($.inArray($(this).attr('class'), allTokens) === -1){
+                allTokens.push($(this).attr('class'));
+            }
             if ($(this).prop("checked")) {
                 var answer = {token: $(this).attr('class'), answer: $(this).attr('name')};
                 response.push(answer);
@@ -43,7 +45,7 @@
             url: '/check',
             headers: {'Content-Type': 'application/json'},
             /*[+
-            data: JSON.stringify({answers: response, tokens: Array.from(allTokens), userInfo: 'Имя: ' + [[${inputFIO}]] + '\nГруппа: ' + [[${inputGroup}]] + '\nКурс: ' + [[${inputCourse}]]}),
+            data: JSON.stringify({answers: response, tokens: allTokens, userInfo: 'Имя: ' + [[${inputFIO}]] + '\nГруппа: ' + [[${inputGroup}]] + '\nКурс: ' + [[${inputCourse}]]}),
             +]*/
             success: function (data) {
                 alert(data)
