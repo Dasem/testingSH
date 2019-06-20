@@ -4,6 +4,11 @@ public class Answer {
     String token;
     Integer answer;
 
+    public Answer(String token, Integer answer) {
+        this.token = token;
+        this.answer = answer;
+    }
+
     public String getToken() {
         return token;
     }

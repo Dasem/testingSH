@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{bootstrap.min.css}">
+
+    <title>Title</title>
+</head>
+<body>
+<div class="container">
+    <form class="form-signin" th:action="@{/}">
+        <h1 class="h3 mb-3 font-weight-normal">Вернуться на начальную страницу</h1>
+        <h2 th:text="${result}"></h2>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">На страницу регистрации</button>
+    </form>
+    <p class="mt-5 mb-3 text-muted">&copy; 2019-2020</p>
+</div>
+<script src="/jquery.js"></script>
+<script src="/popper.js"></script>
+<script src="/bootstrap.js"></script>
+</body>
+</html>

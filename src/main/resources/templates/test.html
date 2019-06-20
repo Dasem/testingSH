@@ -12,47 +12,20 @@
     <h1>Удачи!</h1>
 
     <a th:href="@{/}">Страница регистрации</a>
-
-    <div th:each="question,stat:${questions}" style="padding: 10px;">
-        Вопрос <span th:text="${stat.count}"></span>:<p th:text="${question.getQuestion()}"></p>
-        <div th:each="option,iterStat:${question.getOptions()}" class="form-check">
-            <label>
-                <input type="checkbox" th:text="${option}" class="form-check-input" th:classappend="${question.getToken()}"
-                       th:name="${iterStat.index}">
-            </label>
+    <form th:action="@{/result}" method="post">
+        <div th:each="question,stat:${questions}" style="padding: 10px;">
+            Вопрос <span th:text="${stat.count}"></span>:<p th:text="${question.getQuestion()}"></p>
+            <div th:each="option,iterStat:${question.getOptions()}" class="form-check">
+                <label>
+                    <input type="checkbox" th:text="${option}" class="form-check-input"
+                           name="answers" th:value="${iterStat.index}+'_'+${question.getToken()}">
+                </label>
+            </div>
         </div>
-    </div>
-    <button class="btn btn-lg btn-primary btn-block" type="button" onclick="checkAnswers()">Закончить тест</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Закончить тест</button>
+    </form>
     <p class="mt-5 mb-3 text-muted">&copy; 2019-2020</p>
 </div>
-<script th:inline="javascript" type="text/javascript">
-    function checkAnswers() {
-        $(':checkbox').attr('disabled', true);
-        $('button').attr('disabled', true);
-        var response = [{token: "", answer: 0}];
-        var allTokens = [];
-        $('input').each(function () {
-            if ($.inArray($(this).attr('class'), allTokens) === -1){
-                allTokens.push($(this).attr('class'));
-            }
-            if ($(this).prop("checked")) {
-                var answer = {token: $(this).attr('class'), answer: $(this).attr('name')};
-                response.push(answer);
-            }
-        });
-        $.ajax({
-            type: 'POST',
-            url: '/check',
-            headers: {'Content-Type': 'application/json'},
-            /*[+
-            data: JSON.stringify({answers: response, tokens: allTokens, userInfo: 'Имя: ' + [[${inputFIO}]] + '\nГруппа: ' + [[${inputGroup}]] + '\nКурс: ' + [[${inputCourse}]]}),
-            +]*/
-            success: function (data) {
-                alert(data)
-            }
-        });
-    }
-</script>
 <script th:src="@{jquery.js}"></script>
 <script th:src="@{popper.js}"></script>
 <script th:src="@{bootstrap.js}"></script>

@@ -11,36 +11,21 @@
     <h1>Выберите темы</h1>
 
     <a th:href="@{/}">Страница регистрации</a>
-
-    <div th:each="theme:${themes}">
-        <th>
-        <label>
-            <input type="checkbox" th:text="${theme}"
-                   th:name="${theme}">
-        </label>
-    </div>
-
     <form th:action="@{/test}" method="post">
-        <input type="hidden" name="inputFIO" th:value="${inputFIO}">
-        <input type="hidden" name="inputCourse" th:value="${inputCourse}">
-        <input type="hidden" name="inputGroup" th:value="${inputGroup}">
-        <input type="hidden" name="inputQuestionsCount" th:value="${inputQuestionsCount}">
-        <input type="hidden" name="themes" id="themes">
 
-        <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="startTest()">Начать тест</button>
+        <div th:each="theme:${themes}">
+            <label>
+                <input type="checkbox" th:text="${theme}"
+                       name="themes" th:value="${theme}">
+            </label>
+        </div>
+        <input type="hidden" name="inputQuestionsCount" th:value="${inputQuestionsCount}">
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Начать тест</button>
         <p class="mt-5 mb-3 text-muted">&copy; 2019-2020</p>
     </form>
 
 </div>
-<script type="text/javascript">
-    function startTest() {
-        var themes = [];
-        $(':checked').each(function () {
-            themes.push($(this).attr('name'))
-        });
-        $('#themes').val(themes);
-    }
-</script>
 <script th:src="@{jquery.js}"></script>
 <script th:src="@{popper.js}"></script>
 <script th:src="@{bootstrap.js}"></script>
