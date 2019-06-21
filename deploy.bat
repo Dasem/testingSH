@@ -1,14 +1,14 @@
-@echo off
+﻿@echo off
 mvn clean install
-del deployed
+del /q deployed
 md deployed
-echo "Перенос файла start.bat..."
+echo "Move start.bat..."
 copy start.bat deployed\start.bat
-echo "Перенос файла questions.xlsx..."
+echo "Move questions.xlsx..."
 copy questions.xlsx deployed\questions.xlsx
-echo "Перенос файла readme.txt..."
+echo "Move readme.txt..."
 copy readme.txt deployed\readme.txt
-echo "Перенос файла testing-1.0.4.jar..."
+echo "Move testing-1.0.4.jar..."
 copy target\testing-1.0.4.jar deployed\testing-1.0.4.jar
-echo "Билд успешно завершён, готовый проект в папке deployed"
+echo "Build success, look adt folder 'deployed' deployed"
 pause
