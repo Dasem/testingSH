@@ -1,6 +1,7 @@
 package com.shem.testing.controllers;
 
 import com.shem.testing.AnswersHolder;
+import com.shem.testing.gui.FXController;
 import com.shem.testing.services.QuestionFilterService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -17,7 +18,12 @@ public abstract class BaseController {
         {
             String resultForSave = body.produceSaveToServerString(questionFilterService.filter(body.getTokens()))
                     .replace("\n","\r\n");
+
+            //В консоль
             System.out.println(resultForSave);
+            //В гуи
+            FXController.getInstance().addResult(resultForSave);
+
             writer.write(resultForSave);
             writer.append('\n');
             writer.flush();
