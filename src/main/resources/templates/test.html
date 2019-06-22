@@ -15,9 +15,9 @@
     <form th:action="@{/result}" method="post">
         <div th:each="question,stat:${questions}" style="padding: 10px;">
             Вопрос <span th:text="${stat.count}"></span>:<p th:text="${question.getQuestion()}"></p>
-            <div th:each="option,iterStat:${question.getOptions()}" class="form-check">
+            <div th:each="option,iterStat:${question.getOptions()}">
                 <label>
-                    <input type="checkbox" th:text="${option}" class="form-check-input"
+                    <input type="checkbox" th:text="${option}"
                            name="answers" th:value="${iterStat.index}+'_'+${question.getToken()}">
                 </label>
             </div>

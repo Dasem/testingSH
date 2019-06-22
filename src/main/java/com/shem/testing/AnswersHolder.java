@@ -47,7 +47,6 @@ public class AnswersHolder {
         double percent = (1.0 * rightAnswers.size() / allQuestions) * 100;
         filteredQuestions.removeAll(rightAnswers);//Сейчас тут неверные ответы
         return "Время: " + new Date().toString() + "\n" +
-                "Студент:\n" +
                 userInfo + "\n" +
                 "Правильно ответил на " + Math.round(percent) + "% вопросов (" + rightAnswers.size() + " из " + allQuestions + ")\n" +
                 "Не верные ответы:\n" +
