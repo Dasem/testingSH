@@ -4,6 +4,7 @@ import com.shem.testing.gui.Starter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.io.Console;
 import java.net.SocketException;
 
 @SpringBootApplication
@@ -14,5 +15,4 @@ public class TestingApplication {
         System.out.println(Utils.getServerUrl());
         Starter.guiLaunch();
     }
-
 }

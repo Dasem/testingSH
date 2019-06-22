@@ -18,6 +18,7 @@ public class Starter extends Application {
                     .getResource("/gui/scene.fxml"));
             primaryStage.setTitle("Testing SH");
             primaryStage.setScene(new Scene(root));
+            primaryStage.setOnCloseRequest(event -> System.exit(0));
             primaryStage.show();
         } catch (IOException e) {
             e.printStackTrace();
