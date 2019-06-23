@@ -29,8 +29,13 @@ public class MainController extends BaseController {
     FilterService filterService;
 
     @GetMapping("/")
-    public String regPage(Model model) {
+    public String regPage(Model model,  HttpSession session) {
         model.addAttribute("questionsSize", xlsxParser.getQuestions().size());
+
+        model.addAttribute("inputFIO", session.getAttribute("inputFIO"));
+        model.addAttribute("inputGroup", session.getAttribute("inputGroup"));
+        model.addAttribute("inputCourse", session.getAttribute("inputCourse"));
+
         return "registration";
     }
 

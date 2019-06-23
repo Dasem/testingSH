@@ -37,11 +37,13 @@ public class FXController {
     }
 
     public void addResult(String result) {
-        results.add(result);
+        Platform.runLater(() -> {
+            results.add(result);
+        });
     }
 
     @FXML
-    public void getIp(){
+    public void getIp() {
         Platform.runLater(() -> {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Ваш IP");

@@ -14,7 +14,7 @@
         <div class="form-group row">
             <label for="inputFIO" class="col-sm-2 col-form-label">ФИО</label>
             <div class="col-sm-10">
-                <input type="text" id="inputFIO" name="inputFIO" class="form-control" placeholder="ФИО" required
+                <input type="text" id="inputFIO" name="inputFIO" class="form-control" placeholder="ФИО" th:value="${inputFIO}" required
                        autofocus>
             </div>
         </div>
@@ -22,7 +22,7 @@
         <div class="form-group row">
             <label for="inputGroup" class="col-sm-2 col-form-label">Группа</label>
             <div class="col-sm-10">
-                <input type="text" id="inputGroup" name="inputGroup" class="form-control" placeholder="Группа" required>
+                <input type="text" id="inputGroup" name="inputGroup" class="form-control" placeholder="Группа" th:value="${inputGroup}" required>
             </div>
         </div>
 
@@ -30,7 +30,7 @@
             <label for="inputCourse" class="col-sm-2 col-form-label">Курс</label>
             <div class="col-sm-10">
                 <input type="number" id="inputCourse" name="inputCourse" min="1" max="6" class="form-control"
-                       placeholder="Курс" required>
+                       placeholder="Курс" th:value="${inputCourse}" required>
             </div>
         </div>
 
