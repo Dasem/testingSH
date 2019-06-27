@@ -14,6 +14,7 @@
           <Menu mnemonicParsing="false" text="Параметры">
             <items>
               <MenuItem fx:id="getIp" mnemonicParsing="false" onAction="#getIp" text="Узнать IP" />
+                  <MenuItem fx:id="getIp1" mnemonicParsing="false" onAction="#getServerState" text="Проверить сервер" />
             </items>
           </Menu>
         </menus>

@@ -59,6 +59,9 @@ public class AnswersHolder {
         StringBuilder errors = new StringBuilder();
         for (Question question : wrongAnswers) {
             errors.append(" - ").append(question.getQuestion()).append("\n");
+            for(Integer userAnswer:question.getUserAnswers()){
+                errors.append("\t").append(question.getOptions().get(userAnswer)).append("\n");
+            }
         }
         return errors.toString();
     }
@@ -71,6 +74,7 @@ public class AnswersHolder {
                     && answersForQuestionToken.containsAll(question.getAnswers())) {
                 rightAnswers.add(question);
             }
+            question.setUserAnswers(answersForQuestionToken);
         }
         return rightAnswers;
     }

@@ -15,6 +15,8 @@ import java.net.SocketException;
 
 public class FXController {
 
+    public static boolean SERVER_STATE = false;
+
     private static FXController instance;
 
     @FXML
@@ -53,6 +55,21 @@ public class FXController {
             } catch (SocketException e) {
                 alert.setContentText("Проблемы с подключением");
                 e.printStackTrace();
+            }
+            alert.show();
+        });
+    }
+
+    @FXML
+    public void getServerState() {
+        Platform.runLater(() -> {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Статус сервера");
+            alert.setHeaderText("Информация");
+            if (SERVER_STATE){
+                alert.setContentText("Сервер включен");
+            } else {
+                alert.setContentText("Сервер ещё не включился, пожалуйста, подождите");
             }
             alert.show();
         });
