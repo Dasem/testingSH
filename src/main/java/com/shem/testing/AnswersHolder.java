@@ -59,8 +59,11 @@ public class AnswersHolder {
         StringBuilder errors = new StringBuilder();
         for (Question question : wrongAnswers) {
             errors.append(" - ").append(question.getQuestion()).append("\n");
-            for(Integer userAnswer:question.getUserAnswers()){
+            for (Integer userAnswer : question.getUserAnswers()) {
                 errors.append("\t").append(question.getOptions().get(userAnswer)).append("\n");
+            }
+            if (question.getUserAnswers() == null || question.getUserAnswers().size() == 0) {
+                errors.append("\t").append("Нет ответа").append("\n");
             }
         }
         return errors.toString();

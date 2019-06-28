@@ -29,7 +29,7 @@ public class MainController extends BaseController {
     FilterService filterService;
 
     @GetMapping("/")
-    public String regPage(Model model,  HttpSession session) {
+    public String regPage(Model model, HttpSession session) {
         model.addAttribute("questionsSize", xlsxParser.getQuestions().size());
 
         model.addAttribute("inputFIO", session.getAttribute("inputFIO"));
@@ -57,7 +57,10 @@ public class MainController extends BaseController {
     @PostMapping("/test")
     public String test(Model model, HttpSession session,
                        @RequestParam(name = "inputQuestionsCount") Integer questionsCount,
-                       @RequestParam(name = "themes") List<String> themes) {
+                       @RequestParam(name = "themes", required = false) List<String> themes) {
+        if (themes == null){
+            themes = new ArrayList<>();
+        }
         model.addAttribute("inputQuestionsCount", questionsCount);
         List<Question> filteredByThemesQuestions = filterService.filterQuestionByThemes(themes);
         List<Question> filteredByAllQuestions = filterService.filterQuestionByCount(filteredByThemesQuestions, questionsCount);
@@ -68,7 +71,10 @@ public class MainController extends BaseController {
 
     @SuppressWarnings("unchecked")
     @PostMapping("/result")
-    public String themes(Model model, HttpSession session, @RequestParam(name = "answers") List<String> answers) {
+    public String themes(Model model, HttpSession session, @RequestParam(name = "answers", required = false) List<String> answers) {
+        if (answers == null){
+            answers = new ArrayList<>();
+        }
         AnswersHolder answersHolder = new AnswersHolder();
         List<Answer> oAnswers = new ArrayList<>();
         for (String answer : answers) {
