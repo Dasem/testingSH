@@ -16,7 +16,7 @@ public class TestingApplication {
     public static void main(String[] args) throws SocketException {
         new Thread(Starter::guiLaunch).start();
         SpringApplication.run(TestingApplication.class, args);
-        FXController.SERVER_STATE=true;
+        FXController.SERVER_STATE = true;
         System.out.println(Utils.getServerUrl());
     }
 }

@@ -2,8 +2,6 @@
 call "apache-maven-3.6.1/bin/mvn" clean install
 del /q deployed
 md deployed
-echo "Move start.bat..."
-copy start.bat deployed\start.bat
 echo "Move questions.xlsx..."
 copy questions.xlsx deployed\questions.xlsx
 echo "Move readme.txt..."
